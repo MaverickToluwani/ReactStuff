@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.navbar{
+  background-color: aquamarine;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.navGuys{
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+.formClass{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* margin: 15px; */
+  padding: 15px;
+
+  border: 1px solid black;
+  /* outline-style: solid; */
+  /* outline-color: red;
+  outline-width: thin; */
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  
+}
+ .formContainer{
+  display: flex;
+  height:100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+ }
+
+ .form-group input {
+  padding: 5px 10px; 
+  border-radius: 8px;
+ }
+
+ .btn{
+  padding: 10px 15px;
+  border-radius: 12px;
+  background-color: burlywood;
+  color: black;
+  transition: all ease-in-out 1s;
+  cursor: pointer;
+ }
+
+ .btn:hover{
+  background-color: brown;
+  color: #fff;
+ }
+
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
