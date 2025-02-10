@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { About } from "./Pages/About"
 import { Blog } from "./Pages/Blog";
-import { Users } from './Pages/Users';
+import Users  from './Pages/Users';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

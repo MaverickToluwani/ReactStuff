@@ -2,52 +2,47 @@ import React from 'react'
 import axios from "axios"
 import {useState, useEffect} from "react"
 import NavBar from '../Components/NavBar';
+import LoadingImages from '../Components/LoadingImages';
+import UsersLists from '../Components/UsersLists';
 
-export const Users = () => {
-
+const Users = () => {
     const [users, setUsers] = useState([]);
-    const [loading, setloading] = useState(false);
-
+    const [loading, setLoading] = useState(false);
+    const [gender, setGender] = useState('');
+    const handleChange = (e) =>{setGender(e.target.value)}
+  
     const getUsers = async () => {
-        try{
-        const response = await axios.get("https://randomuser.me/api/");
-
-        // let counter = 0
-        
-        setUsers(response.data.results)
-        console.log(users);
+      setLoading(true);
+      try {
+        const response = await axios.get(`https://randomuser.me/api/?results=10${gender === 'all' ? "" : `&gender=${gender}`}`);
+        if (response.data.results.length > 0) {
+          setUsers(response.data.results);
+          setLoading(false);
         }
-        catch(e){
-            console.log(e)
-        }
-    }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
     useEffect(() => {
-        getUsers()
-    }, []);
-
-    // getUsers();
-
-  return (
-    <div className="flex flex-col gap-5">
+      getUsers();
+    }, [gender]);
+  
+    return (
+      <div className="flex flex-col items-center w-full">
         <NavBar/>
-        <div className='grid grid-cols-1  p-8 sm:grid-cols-2 md:grid-cols-3 
-        lg:grid-cols-4'>
-
-            {
-                users.map((user, index) => {
-                    return (
-                        <div key={index} className="shadow-md rounded-lg p-4 bg-white flex flex-col items-center text-center">
-                            <img src={user.picture.medium} alt="User Avatar" className="w-20 h-20 rounded-full mb-3" />
-                            <ul className="list-none space-y-1 text-gray-700">
-                                <li className="text-lg font-semibold">{user.name.title} {user.name.first} {user.name.last}</li>
-                                <li className="text-sm text-gray-500 capitalize">{user.gender}</li>
-                            </ul>
-                        </div>
-
-                    )
-                })
-            }
-        </div>
-    </div>
-  )
-}
+        <select onChange={handleChange} className='w-fit my-5 border p-3 rounded-lg'>
+          <option value='all'>All Users</option>
+          <option value='male'>Male</option>
+          <option value='female'>Female</option>
+        </select>
+        {loading ? ( 
+          <LoadingImages/>
+        ) : (
+          <UsersLists users={users}/>
+        )}
+      </div>
+    );
+  };
+  
+  export default Users;
